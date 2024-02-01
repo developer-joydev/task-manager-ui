@@ -59,7 +59,8 @@ const CreateTask = ({ showModal, setShowModal }) => {
       <TaskForm
         handleSubmit={handleSubmit}
         onChangeHandler={onChangeHandler}
-        taskValue={formData}
+        // taskValue={formData}
+        formType="create"
       />
     </TaskModal>
   );

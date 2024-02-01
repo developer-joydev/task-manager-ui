@@ -5,8 +5,7 @@ import useRequest from "../hooks/useRequest";
 import AuthContext from "../context/auth";
 import TaskContext from "../context/task";
 
-const UpdateTask = ({ task }) => {
-  const [showModal, setShowModal] = useState(false);
+const UpdateTask = ({ task, showModal, setShowModal }) => {
   const authContext = useContext(AuthContext);
   const taskContext = useContext(TaskContext);
   const { callEndpoint } = useRequest();
@@ -49,7 +48,7 @@ const UpdateTask = ({ task }) => {
       taskContext.getTasks();
       handleClose();
     } catch (error) {
-      console.log("Create task error: ", error);
+      console.log("Update task error: ", error);
     }
   };
 
@@ -63,6 +62,7 @@ const UpdateTask = ({ task }) => {
         handleSubmit={handleSubmit}
         taskValue={formData}
         onChangeHandler={onChangeHandler}
+        formType="edit"
       />
     </TaskModal>
   );

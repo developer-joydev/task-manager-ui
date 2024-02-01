@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
 import FormGroup from "@mui/material/FormGroup";
@@ -8,10 +8,23 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import useRequest from "../hooks/useRequest";
 import TaskContext from "../context/task";
+import UpdateTask from "./UpdateTask";
 
-const TaskItem = ({ id, label, status, duedate }) => {
+const TaskItem = ({ id, label, status, duedate, description }) => {
   const { callEndpoint } = useRequest();
   const taskContext = useContext(TaskContext);
+  const [showModal, setShowModal] = useState(false);
+
+  const task = {
+    title: label,
+    dueDate: duedate,
+    description: description,
+    _id: id,
+  };
+
+  const handleEdit = () => {
+    setShowModal(true);
+  };
 
   const handleDelete = async (id) => {
     try {
@@ -82,10 +95,15 @@ const TaskItem = ({ id, label, status, duedate }) => {
             alignItems: "center",
           }}
         >
-          <ModeEditIcon />
+          <ModeEditIcon onClick={handleEdit} />
           <DeleteIcon onClick={() => handleDelete(id)} />
         </FormGroup>
       </Box>
+      <UpdateTask
+        task={task}
+        showModal={showModal}
+        setShowModal={setShowModal}
+      />
     </MenuItem>
   );
 };

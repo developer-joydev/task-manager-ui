@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import AddIcon from "@mui/icons-material/Add";
 import Layout from "./Layout";
 import CreateTask from "./CreateTask";
+import UpdateTask from "./UpdateTask";
 import TaskItem from "./TaskItem";
 import useRequest from "../hooks/useRequest";
 import TaskContext from "../context/task";
@@ -32,16 +33,6 @@ const TaskLists = () => {
     fetchTasks();
   }, [fetchTasks]);
 
-  if (tasks.length === 0) {
-    return (
-      <Layout>
-        <Box sx={{ bgcolor: "#E9E0F9", px: 2, height: "100%" }}>
-          <Typography>No task found</Typography>
-        </Box>
-      </Layout>
-    );
-  }
-
   return (
     <TaskContext.Provider
       value={{
@@ -63,6 +54,11 @@ const TaskLists = () => {
               />
             ))}
           </MenuList>
+          {tasks.length === 0 && (
+            <Box sx={{ bgcolor: "#E9E0F9", px: 2, height: "100%" }}>
+              <Typography>No task found</Typography>
+            </Box>
+          )}
           <Fab
             color="primary"
             aria-label="add"

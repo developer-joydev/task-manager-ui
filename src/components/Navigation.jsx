@@ -29,7 +29,11 @@ function Navigation() {
           <Typography variant="h6" sx={{ fontSize: 14 }}>
             Welcome {authContext?.userName},
           </Typography>
-          <Button color="inherit" onClick={authContext.logout}>
+          <Button
+            sx={{ bgcolor: "red", ml: 2 }}
+            color="inherit"
+            onClick={authContext.logout}
+          >
             Logout
           </Button>
         </Toolbar>
